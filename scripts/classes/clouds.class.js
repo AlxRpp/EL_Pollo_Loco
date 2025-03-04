@@ -3,8 +3,8 @@ class Clouds extends MoveableObject{
     height = 250;
     width = 500;
    
-    constructor(){
-        super().loadImage('./assets/images/5_background/layers/4_clouds/1.png')
+    constructor(path){
+        super().loadImage(path)
         this.x =  Math.random() * 200
       
     }

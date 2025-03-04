@@ -10,16 +10,15 @@ class World {
     ];
 
     clouds = [
-        new Clouds('./assets/images/5_background/layers/4_clouds/1.png'),
-        new Clouds('./assets/images/5_background/layers/4_clouds/2.png'),
+         new Clouds('./assets/images/background/4_clouds/1.png'),
 
     ];
 
     backgrounds = [
-        new Background('./assets/images/5_background/layers/air.png'),
-        new Background('./assets/images/5_background/layers/3_third_layer/1.png'),
-        new Background('./assets/images/5_background/layers/2_second_layer/1.png'),
-        new Background('./assets/images/5_background/layers/1_first_layer/1.png'),
+        new Background('./assets/images/background/Sky.png'),
+        new Background('./assets/images/background/Background.png'),
+        new Background('./assets/images/background/Foreground.png'),
+        new Background('./assets/images/background/Ground.png'),
 
     ];
 
