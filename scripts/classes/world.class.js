@@ -8,9 +8,19 @@ class World {
         new Chicken(),
         new Chicken(),
     ];
+
     clouds = [
         new Clouds(),
     ];
+
+    backgrounds = [
+        new Background('./assets/images/5_background/layers/air.png'),
+        new Background('./assets/images/5_background/layers/3_third_layer/1.png'),
+        new Background('./assets/images/5_background/layers/2_second_layer/1.png'),
+        new Background('./assets/images/5_background/layers/1_first_layer/1.png'),
+
+    ];
+
 
 
     constructor(canvas) {
@@ -23,14 +33,12 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        });
-        this.clouds.forEach(cloud => {
-            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
-        });
 
+        this.addObjectToCanvas(this.backgrounds);
+
+        this.addItemToCanvas(this.character)
+        this.addObjectToCanvas(this.enemies);
+        this.addObjectToCanvas(this.clouds);
 
 
 
@@ -40,5 +48,16 @@ class World {
     }
 
 
+    addObjectToCanvas(object) {
+        object.forEach(movableObject => {
+            this.addItemToCanvas(movableObject) 
+            })
+    }
+
+
+    addItemToCanvas(movableOBJ) {
+        this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
+
+    }
 
 }
