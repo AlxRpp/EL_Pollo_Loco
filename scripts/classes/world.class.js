@@ -3,26 +3,24 @@ class World {
     ctx;
     canvas;
     character = new Character();
+    keyboard;
+    camera_x = 0;
     enemies = [
         new Chicken(),
         new Chicken(),
         new Chicken(),
     ];
-
     clouds = [
         new Clouds('./assets/images/background/4_clouds/1.png'),
 
     ];
-
     backgrounds = [
         new Background('./assets/images/background/Sky.png'),
         new Background('./assets/images/background/Background.png'),
         new Background('./assets/images/background/Foreground.png'),
         new Background('./assets/images/background/Ground.png'),
-
     ];
 
-    keyboard;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -39,15 +37,12 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.backgrounds);
-
         this.addItemToCanvas(this.character)
         this.addObjectToCanvas(this.enemies);
         this.addObjectToCanvas(this.clouds);
-
-
-
+        this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => {
             this.draw();
         })
