@@ -11,22 +11,27 @@ class Character extends MoveableObject {
         './assets/images/2_character_pepe/2_walk/W-26.png',
     ];
 
-    constructor(){
+    world;
+
+    constructor() {
         super().loadImage('./assets/images/2_character_pepe/2_walk/W-21.png')
         this.loadImages(this.images_walking)
-        this.animate()
+        this.animate();
     }
 
-    animate(){
-        setInterval(()=>{
-            let i = this.currentImage % this.images_walking.length;
-            let path = this.images_walking[i];
-            this.img = this.imageChache[path];
-            this.currentImage++;
+    animate() {
+        setInterval(() => {
+            if (this.world.keyboard.right) {
+                let i = this.currentImage % this.images_walking.length;
+                let path = this.images_walking[i];
+                this.img = this.imageChache[path];
+                this.currentImage++;
+            }
         }, 70)
     }
 
-    jump(){
-        console.log("Character is Jumping");    
+    
+    jump() {
+        console.log("Character is Jumping");
     }
 }
