@@ -1,7 +1,8 @@
 class Character extends MoveableObject {
-    height = 250
-    width = 120
-    y = 180
+    height = 250;
+    width = 120;
+    y = 180;
+    speed = 10;
     images_walking = [
         './assets/images/2_character_pepe/2_walk/W-21.png',
         './assets/images/2_character_pepe/2_walk/W-22.png',
@@ -22,6 +23,15 @@ class Character extends MoveableObject {
     animate() {
         setInterval(() => {
             if (this.world.keyboard.right) {
+                this.x += this.speed
+            }
+            if (this.world.keyboard.left) {
+                this.x -= this.speed
+            }
+        }, 1000 / 60)
+
+        setInterval(() => {
+            if (this.world.keyboard.right || this.world.keyboard.left) {
                 let i = this.currentImage % this.images_walking.length;
                 let path = this.images_walking[i];
                 this.img = this.imageChache[path];
@@ -30,7 +40,7 @@ class Character extends MoveableObject {
         }, 70)
     }
 
-    
+
     jump() {
         console.log("Character is Jumping");
     }
