@@ -4,6 +4,7 @@ class MoveableObject{
     y = 250;
     width = 50;
     height = 150;
+    speed = .15;
 
     loadImage(path){
         this.img = new Image();

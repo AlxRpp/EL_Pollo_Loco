@@ -6,6 +6,12 @@ class Clouds extends MoveableObject{
     constructor(path){
         super().loadImage(path)
         this.x =  Math.random() * 200
-      
+        this.animate();
+    }
+
+    animate(){
+        setInterval(() => {
+           this.x -= this.speed 
+        }, 1000 / 60);
     }
 }
