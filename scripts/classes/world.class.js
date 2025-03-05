@@ -5,10 +5,7 @@ class World {
     character = new Character();
     keyboard;
     camera_x = 0;
-    enemies = level1.enemies;
-    clouds = level1.clouds;
-    backgrounds = level1.backgrounds;
-
+    level = level1;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -26,10 +23,10 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectToCanvas(this.backgrounds);
+        this.addObjectToCanvas(this.level.backgrounds);
         this.addItemToCanvas(this.character)
-        this.addObjectToCanvas(this.enemies);
-        this.addObjectToCanvas(this.clouds);
+        this.addObjectToCanvas(this.level.enemies);
+        this.addObjectToCanvas(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => {
             this.draw();
