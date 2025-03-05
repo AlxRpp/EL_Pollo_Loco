@@ -5,39 +5,9 @@ class World {
     character = new Character();
     keyboard;
     camera_x = 0;
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-    ];
-
-    clouds = [
-        new Clouds('./assets/images/5_background/layers/4_clouds/1.png'),
-        // new Clouds('./assets/images/5_background/layers/4_clouds/2.png'),
-    ];
-
-    backgrounds = [
-        new Background('./assets/images/5_background/layers/air.png', -719),
-        new Background('./assets/images/5_background/layers/3_third_layer/2.png', -719),
-        new Background('./assets/images/5_background/layers/2_second_layer/2.png', -719),
-        new Background('./assets/images/5_background/layers/1_first_layer/2.png', -719),
-        new Background('./assets/images/5_background/layers/air.png', 0),
-        new Background('./assets/images/5_background/layers/3_third_layer/1.png', 0),
-        new Background('./assets/images/5_background/layers/2_second_layer/1.png', 0),
-        new Background('./assets/images/5_background/layers/1_first_layer/1.png', 0),
-        new Background('./assets/images/5_background/layers/air.png', 719),
-        new Background('./assets/images/5_background/layers/3_third_layer/2.png', 719),
-        new Background('./assets/images/5_background/layers/2_second_layer/2.png', 719),
-        new Background('./assets/images/5_background/layers/1_first_layer/2.png', 719),
-        new Background('./assets/images/5_background/layers/air.png', 719 * 2),
-        new Background('./assets/images/5_background/layers/3_third_layer/1.png', 719 * 2),
-        new Background('./assets/images/5_background/layers/2_second_layer/1.png', 719 * 2),
-        new Background('./assets/images/5_background/layers/1_first_layer/1.png', 719 * 2),
-        new Background('./assets/images/5_background/layers/air.png', 719*3),
-        new Background('./assets/images/5_background/layers/3_third_layer/2.png', 719*3),
-        new Background('./assets/images/5_background/layers/2_second_layer/2.png', 719*3),
-        new Background('./assets/images/5_background/layers/1_first_layer/2.png', 719*3),
-    ];
+    enemies = level1.enemies;
+    clouds = level1.clouds;
+    backgrounds = level1.backgrounds;
 
 
     constructor(canvas, keyboard) {
@@ -46,7 +16,6 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-
     }
 
     setWorld() {
@@ -61,21 +30,16 @@ class World {
         this.addObjectToCanvas(this.enemies);
         this.addObjectToCanvas(this.clouds);
         this.ctx.translate(-this.camera_x, 0);
-
-
-
         requestAnimationFrame(() => {
             this.draw();
         })
     }
-
 
     addObjectToCanvas(object) {
         object.forEach(movableObject => {
             this.addItemToCanvas(movableObject)
         })
     }
-
 
     addItemToCanvas(movableOBJ) {
         if (movableOBJ.otherDirection) {
@@ -88,5 +52,4 @@ class World {
             this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
         }
     }
-
 }
