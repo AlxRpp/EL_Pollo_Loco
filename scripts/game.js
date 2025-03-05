@@ -2,46 +2,39 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-function init() {
+function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
+
 window.addEventListener("keydown", (event) => {
-    if (event.keyCode == 39) {
-        keyboard.right = true;
+    if (event.keyCode == 39 ) {
+        keyboard.right = true;  
     }
-    if (event.keyCode == 37) {
+    if (event.keyCode == 37 ) {
         keyboard.left = true;
     }
-    if (event.keyCode == 32) {
+    if (event.keyCode == 32 ) {
         keyboard.space = true;
     }
-    if (event.keyCode == 68) {
+    if (event.keyCode == 68 ) {
         keyboard.d = true;
-    }
-}
-);
+    }    
+});
+
 
 window.addEventListener("keyup", (event) => {
-    if (event.keyCode == 39) {
+    if (event.keyCode == 39 ) {
         keyboard.right = false;
     }
-    if (event.keyCode == 37) {
+    if (event.keyCode == 37 ) {
         keyboard.left = false;
     }
-    if (event.keyCode == 32) {
+    if (event.keyCode == 32 ) {
         keyboard.space = false;
     }
-    if (event.keyCode == 68) {
+    if (event.keyCode == 68 ) {
         keyboard.d = false;
-    }
-}
-);
-
-
-
-
-
-
-
+    }    
+});

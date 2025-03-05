@@ -3,4 +3,8 @@ class Keyboard{
     right = false; 
     space = false;
     d = false;
+
+    constructor(){
+
+    }
 }
