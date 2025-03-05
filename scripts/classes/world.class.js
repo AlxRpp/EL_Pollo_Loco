@@ -32,7 +32,7 @@ class World {
 
     }
 
-    setWorld(){
+    setWorld() {
         this.character.world = this;
     }
 
@@ -55,22 +55,20 @@ class World {
 
     addObjectToCanvas(object) {
         object.forEach(movableObject => {
-            this.addItemToCanvas(movableObject) 
-            })
+            this.addItemToCanvas(movableObject)
+        })
     }
 
 
     addItemToCanvas(movableOBJ) {
         if (movableOBJ.otherDirection) {
             this.ctx.save();
-            this.ctx.translate(movableOBJ.width, 0);
+            this.ctx.translate(movableOBJ.x + movableOBJ.width, movableOBJ.y);
             this.ctx.scale(-1, 1);
-            movableOBJ.x = movableOBJ.x * -1
-        }
-        this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
-        if (movableOBJ.otherDirection) {
-            movableOBJ.x = movableOBJ.x * -1;
+            this.ctx.drawImage(movableOBJ.img, 0, 0, movableOBJ.width, movableOBJ.height);
             this.ctx.restore();
+        } else {
+            this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
         }
     }
 
