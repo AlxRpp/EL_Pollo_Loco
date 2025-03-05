@@ -10,7 +10,7 @@ class World {
     ];
 
     clouds = [
-         new Clouds('./assets/images/background/4_clouds/1.png'),
+        new Clouds('./assets/images/background/4_clouds/1.png'),
 
     ];
 
@@ -22,13 +22,18 @@ class World {
 
     ];
 
+    keyboard;
 
-
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.keyboard = keyboard
         this.draw();
+        this.setWorld();
+    }
 
+    setWorld() {
+        this.character.world = this;
     }
 
 
@@ -51,8 +56,8 @@ class World {
 
     addObjectToCanvas(object) {
         object.forEach(movableObject => {
-            this.addItemToCanvas(movableObject) 
-            })
+            this.addItemToCanvas(movableObject)
+        })
     }
 
 
