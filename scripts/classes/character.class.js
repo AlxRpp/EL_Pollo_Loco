@@ -1,7 +1,8 @@
 class Character extends MoveableObject {
-    height = 125
-    width = 62.5
-    y = 330
+    height = 125;
+    width = 62.5;
+    y = 330;
+    speed = 10;
     images_Walking = [
         './assets/images/charakter/run/green__0012_run_1.png',
         './assets/images/charakter/run/green__0013_run_2.png',
@@ -19,15 +20,25 @@ class Character extends MoveableObject {
     }
 
     animate() {
+
         setInterval(() => {
             if (this.world.keyboard.right) {
+                this.x += this.speed;
+            }
+            if (this.world.keyboard.left) {
+                this.x -= this.speed;
+            }
+        }, 1000 / 60)
+        
+        setInterval(() => {
+            if (this.world.keyboard.right || this.world.keyboard.left) {
                 let i = this.currentImage % this.images_Walking.length;
                 let path = this.images_Walking[i];
                 this.img = this.imageChache[path]
                 this.currentImage++
             }
 
-        }, 100);
+        }, 80);
     }
 
     jump() {
