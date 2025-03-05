@@ -2,7 +2,6 @@ class Character extends MoveableObject {
     height = 125
     width = 62.5
     y = 330
-    currentImage = 0;
     images_Walking = [
         './assets/images/charakter/run/green__0012_run_1.png',
         './assets/images/charakter/run/green__0013_run_2.png',
@@ -25,7 +24,6 @@ class Character extends MoveableObject {
         this.img = this.imageChache[path]
         this.currentImage++ 
        }, 100);
-
     }
 
     jump(){

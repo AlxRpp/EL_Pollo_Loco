@@ -5,6 +5,7 @@ class MoveableObject{
     width = 50;
     height = 150;
     speed = .15;
+    currentImage = 0;
     imageChache = {};
 
     loadImage(path){
