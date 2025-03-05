@@ -62,8 +62,15 @@ class World {
 
 
     addItemToCanvas(movableOBJ) {
-        this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
-
+        if (movableOBJ.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(movableOBJ.x + movableOBJ.width, movableOBJ.y);
+            this.ctx.scale(-1, 1);
+            this.ctx.drawImage(movableOBJ.img, 0, 0, movableOBJ.width, movableOBJ.height);
+            this.ctx.restore();
+        } else {
+            this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
+        }
     }
 
 }
