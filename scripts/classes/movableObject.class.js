@@ -11,6 +11,13 @@ class MoveableObject {
     speedY = 0;
     acceleration = 2.5;
 
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    };
+
     applyGravity() {
         setInterval(() => {
             if (this.isaboveGround() || this.speedY > 0) {
@@ -77,4 +84,26 @@ class MoveableObject {
         ctx.drawImage(this.img, 0, 0, this.width, this.height);
         ctx.restore();
     }
-}
+
+    isColliding(mo) {
+                return this.x + this.width - this.offset.right > mo.x + mo.offset.left&&
+                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+                this.x + this.offset.left < mo.x + mo.width -mo.offset.right &&
+                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+            }
+
+
+
+        // return this.x + this.width > mo.x &&
+        //         this.y + this.height > mo.y &&
+        //         this.x < mo.x &&
+        //         this.y < mo.y + mo.height
+        //     }
+
+        //     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
+        //     (this.y + this.offsetY + this.height) >= obj.y &&
+        //     (this.y + this.offsetY) <= (obj.y + obj.height) 
+        // };
+
+
+    }
