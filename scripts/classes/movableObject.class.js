@@ -17,7 +17,7 @@ class MoveableObject{
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             } 
-        }, 1000 / 25)
+        }, 1000 / 30)
     }
 
     isAboveGround(){
