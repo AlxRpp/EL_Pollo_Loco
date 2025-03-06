@@ -30,7 +30,19 @@ class Character extends MoveableObject {
         'assets/images/charakter/jump/green__0029_jump_3.png',
         'assets/images/charakter/jump/green__0030_jump_4.png',
     ];
+    images_dead = [
+        'assets/images/charakter/dead/green__0022_dead_1.png',
+        'assets/images/charakter/dead/green__0023_dead_2.png',
+        'assets/images/charakter/dead/green__0024_dead_3.png',
+        'assets/images/charakter/dead/green__0025_dead_4.png',
+        'assets/images/charakter/dead/green__0026_dead_5.png',
+        'assets/images/charakter/dead/green__0026_dead_5.png',
+        'assets/images/charakter/dead/green__0026_dead_5.png',
+        'assets/images/charakter/dead/green__0026_dead_5.png',
+        'assets/images/charakter/dead/green__0026_dead_5.png',
 
+
+    ];
 
 
 
@@ -39,6 +51,7 @@ class Character extends MoveableObject {
         super().loadImage('./assets/images/charakter/run/green__0012_run_1.png')
         this.loadImages(this.images_Walking);
         this.loadImages(this.images_jumping);
+        this.loadImages(this.images_dead);
         this.applyGravitation();
         this.animate();
     }
@@ -65,12 +78,12 @@ class Character extends MoveableObject {
         }, 1000 / 60)
 
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isDead()) {
+                this.playAnimation(this.images_dead);
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.images_jumping);
-            } else {
-                if (this.world.keyboard.right || this.world.keyboard.left) {
-                    this.playAnimation(this.images_Walking);
-                }
+            } else if (this.world.keyboard.right || this.world.keyboard.left) {
+                this.playAnimation(this.images_Walking);
             }
         }, 100);
     }
