@@ -5,6 +5,14 @@ class Character extends MoveableObject {
     speed = 10;
     world;
 
+    offset = {
+        top: 120,
+        left: 40,
+        right: 30,
+        bottom: 30
+    };
+
+
 
     images_Walking = [
         './assets/images/charakter/run/green__0012_run_1.png',

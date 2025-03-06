@@ -11,6 +11,14 @@ class MoveableObject{
     speedY = 0; 
     acceleration = 2.5;
 
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    };
+
+
     applyGravitation(){
         setInterval(()=>{
             if (this.isAboveGround() || this.speedY > 0) {
@@ -71,7 +79,6 @@ class MoveableObject{
         }
     }
 
-    
         mirroredImage(ctx){
             ctx.save();
             ctx.translate(this.x + this.width, this.y);
@@ -79,4 +86,12 @@ class MoveableObject{
             ctx.drawImage(this.img, 0, 0, this.width, this.height);
             ctx.restore();
     }
+
+    isColliding(mo) {
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left&&
+        this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+        this.x + this.offset.left < mo.x + mo.width -mo.offset.right &&
+        this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+    }
+
 }
