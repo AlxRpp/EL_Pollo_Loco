@@ -12,10 +12,20 @@ class Character extends MoveableObject {
         './assets/images/charakter/run/green__0017_run_6.png',
     ];
 
+    images_jumping = [
+        'assets/images/charakter/jump/green__0027_jump_1.png',
+        'assets/images/charakter/jump/green__0028_jump_2.png',
+        'assets/images/charakter/jump/green__0029_jump_3.png',
+        'assets/images/charakter/jump/green__0030_jump_4.png',
+
+    ];
+
     world;
     constructor() {
         super().loadImage('./assets/images/charakter/run/green__0012_run_1.png')
         this.loadImages(this.images_Walking);
+        this.loadImages(this.images_jumping);
+
         this.applyGravitation();
         this.animate();
     }
@@ -32,12 +42,19 @@ class Character extends MoveableObject {
                 this.x -= this.speed;
                 this.otherDirection = true;
             }
+            if (this.isAboveGround) {
+                this.speedY = 20;
+            }
             this.world.camera_x = -this.x + 75;
         }, 1000 / 60)
         
         setInterval(() => {
+            if (this.world.keyboard.space) {
+                this.playAnimation(this.images_jumping);
+            }
+
             if (this.world.keyboard.right || this.world.keyboard.left) {
-                this.playAnimation(this.images_Walking)
+                this.playAnimation(this.images_Walking);
             }
 
         }, 80);
