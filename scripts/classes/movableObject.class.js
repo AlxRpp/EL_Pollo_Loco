@@ -38,13 +38,15 @@ class MoveableObject {
     }
 
     moveRight() {
-        console.log("moving Right");
+        this.x += this.speed;
     }
 
     moveLeft() {
-        setInterval(() => {
             this.x -= this.speed;
-        }, 1000 / 60);
+    }
+
+    jump() {
+        this.speedY = 22;
     }
 
     playAnimation(images){
