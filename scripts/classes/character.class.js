@@ -25,10 +25,6 @@ class Character extends MoveableObject {
         'assets/images/charakter/jump/green__0028_jump_2.png',
         'assets/images/charakter/jump/green__0029_jump_3.png',
         'assets/images/charakter/jump/green__0030_jump_4.png',
-        'assets/images/charakter/jump/green__0027_jump_1.png',
-        'assets/images/charakter/jump/green__0028_jump_2.png',
-        'assets/images/charakter/jump/green__0029_jump_3.png',
-        'assets/images/charakter/jump/green__0030_jump_4.png',
     ];
     images_dead = [
         'assets/images/charakter/dead/green__0022_dead_1.png',
@@ -36,12 +32,12 @@ class Character extends MoveableObject {
         'assets/images/charakter/dead/green__0024_dead_3.png',
         'assets/images/charakter/dead/green__0025_dead_4.png',
         'assets/images/charakter/dead/green__0026_dead_5.png',
-        'assets/images/charakter/dead/green__0026_dead_5.png',
-        'assets/images/charakter/dead/green__0026_dead_5.png',
-        'assets/images/charakter/dead/green__0026_dead_5.png',
-        'assets/images/charakter/dead/green__0026_dead_5.png',
-
-
+    ];
+    images_hurt = [
+        'assets/images/charakter/hurt/green__0018_hurt_1.png',
+        'assets/images/charakter/hurt/green__0019_hurt_2.png',
+        'assets/images/charakter/hurt/green__0020_hurt_3.png',
+        'assets/images/charakter/hurt/green__0021_hurt_4.png',
     ];
 
 
@@ -52,6 +48,7 @@ class Character extends MoveableObject {
         this.loadImages(this.images_Walking);
         this.loadImages(this.images_jumping);
         this.loadImages(this.images_dead);
+        this.loadImages(this.images_hurt);
         this.applyGravitation();
         this.animate();
     }
@@ -80,6 +77,8 @@ class Character extends MoveableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.images_dead);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.images_hurt);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.images_jumping);
             } else if (this.world.keyboard.right || this.world.keyboard.left) {
