@@ -43,13 +43,11 @@ class World {
 
     addItemToCanvas(movableOBJ) {
         if (movableOBJ.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(movableOBJ.x + movableOBJ.width, movableOBJ.y);
-            this.ctx.scale(-1, 1);
-            this.ctx.drawImage(movableOBJ.img, 0, 0, movableOBJ.width, movableOBJ.height);
-            this.ctx.restore();
+            movableOBJ.drawFrame(this.ctx)
+            movableOBJ.mirroredImage(this.ctx);
         } else {
-            this.ctx.drawImage(movableOBJ.img, movableOBJ.x, movableOBJ.y, movableOBJ.width, movableOBJ.height);
+            movableOBJ.drawFrame(this.ctx)
+            movableOBJ.draw(this.ctx)
         }
     }
 

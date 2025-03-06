@@ -56,4 +56,25 @@ class MoveableObject{
         this.img = this.imageChache[path]
         this.currentImage++
     }
+
+    draw(ctx){
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx){
+        ctx.beginPath();
+        ctx.lineWidth = '1.5';
+        ctx.strokeStyle = 'red';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
+
+    
+        mirroredImage(ctx){
+            ctx.save();
+            ctx.translate(this.x + this.width, this.y);
+            ctx.scale(-1, 1);
+            ctx.drawImage(this.img, 0, 0, this.width, this.height);
+            ctx.restore();
+    }
 }
