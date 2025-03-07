@@ -9,6 +9,7 @@ class World {
     statusbar = new Statusbar();
     coinStatusbar = new CoinStatusbar();
     bottleStatusbar = new BottleStatusbar();
+    coins = new Coins();
 
 
     constructor(canvas, keyboard) {
@@ -38,6 +39,7 @@ class World {
         this.addItemToCanvas(this.bottleStatusbar);
         this.ctx.translate(this.camera_x, 0); // Camera Forewarts
 
+        this.addItemToCanvas(this.coins);
         
         this.addItemToCanvas(this.character)
         this.addObjectToCanvas(this.level.enemies);
