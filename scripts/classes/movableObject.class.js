@@ -83,17 +83,4 @@ class MoveableObject extends DrawableObjects {
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
-
-
-
-    // return this.x + this.width > mo.x &&
-    //         this.y + this.height > mo.y &&
-    //         this.x < mo.x &&
-    //         this.y < mo.y + mo.height
-    //     }
-
-    //     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
-    //     (this.y + this.offsetY + this.height) >= obj.y &&
-    //     (this.y + this.offsetY) <= (obj.y + obj.height) 
-    // };
 }
