@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     level = level1;
+    statusbar = new Statusbar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -25,9 +26,15 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.level.backgrounds);
+        this.addObjectToCanvas(this.level.clouds);
+
+        this.ctx.translate(-this.camera_x, 0); // Camera Backwarts
+        // Space for fixed Elements
+        this.addItemToCanvas(this.statusbar)
+        this.ctx.translate(this.camera_x, 0); // Camera Forewarts
+
         this.addItemToCanvas(this.character)
         this.addObjectToCanvas(this.level.enemies);
-        this.addObjectToCanvas(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => {
             this.draw();
@@ -57,7 +64,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    console.log("Charakter´s Energy:", this.character.energy);
+                    this.statusbar.setPercentage(this.character.energy)
                 }              
             })
         }, 100)
