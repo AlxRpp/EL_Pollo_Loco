@@ -12,20 +12,20 @@ class MoveableObject extends DrawableObjects {
         bottom: 0
     };
 
-    hit(){
-        this.energy -= 5; 
+    hit() {
+        this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0
-        } else{
+        } else {
             this.lastHit = new Date().getTime();
         }
     }
 
-    isDead(){
+    isDead() {
         return this.energy == 0;
     }
 
-    isHurt(){
+    isHurt() {
         let timePassed = new Date() - this.lastHit; // difference in Milliseconds
         timePassed = timePassed / 1000 // difference in seconds
         return timePassed < .4;
@@ -41,7 +41,11 @@ class MoveableObject extends DrawableObjects {
     }
 
     isaboveGround() {
-        return this.y < 170;
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.y < 180;
+        }
     }
 
     moveRight() {
@@ -63,7 +67,7 @@ class MoveableObject extends DrawableObjects {
         this.currentImage++;
     }
 
- 
+
 
     mirroredImage(ctx) {
         ctx.save();
@@ -74,22 +78,22 @@ class MoveableObject extends DrawableObjects {
     }
 
     isColliding(mo) {
-                return this.x + this.width - this.offset.right > mo.x + mo.offset.left&&
-                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-                this.x + this.offset.left < mo.x + mo.width -mo.offset.right &&
-                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-            }
-
-
-
-        // return this.x + this.width > mo.x &&
-        //         this.y + this.height > mo.y &&
-        //         this.x < mo.x &&
-        //         this.y < mo.y + mo.height
-        //     }
-
-        //     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
-        //     (this.y + this.offsetY + this.height) >= obj.y &&
-        //     (this.y + this.offsetY) <= (obj.y + obj.height) 
-        // };
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
+
+
+
+    // return this.x + this.width > mo.x &&
+    //         this.y + this.height > mo.y &&
+    //         this.x < mo.x &&
+    //         this.y < mo.y + mo.height
+    //     }
+
+    //     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
+    //     (this.y + this.offsetY + this.height) >= obj.y &&
+    //     (this.y + this.offsetY) <= (obj.y + obj.height) 
+    // };
+}
