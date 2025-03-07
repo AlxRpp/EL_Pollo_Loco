@@ -1,18 +1,10 @@
-class MoveableObject {
-    img;
-    x = 120;
-    y = 250;
-    width = 50;
-    height = 150;
+class MoveableObject extends DrawableObjects {
     speed = .15;
-    currentImage = 0;
-    imageChache = {};
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
-
     offset = {
         top: 0,
         left: 0,
@@ -53,19 +45,6 @@ class MoveableObject {
         return this.y < 170;
     }
 
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path
-    }
-
-    loadImages(arr) {
-        arr.forEach(path => {
-            let img = new Image();
-            img.src = path
-            this.imageChache[path] = img
-        });
-    }
-
     moveRight() {
         this.x += this.speed;
     }
@@ -83,10 +62,6 @@ class MoveableObject {
         let path = images[i];
         this.img = this.imageChache[path];
         this.currentImage++;
-    }
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
     drawFrame(ctx) {
@@ -126,6 +101,4 @@ class MoveableObject {
         //     (this.y + this.offsetY + this.height) >= obj.y &&
         //     (this.y + this.offsetY) <= (obj.y + obj.height) 
         // };
-
-
     }
