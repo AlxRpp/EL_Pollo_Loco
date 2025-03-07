@@ -14,7 +14,7 @@ class World {
         this.keyboard = keyboard
         this.draw();
         this.setWorld();
-        this.checkCollision();
+        this.run();
     }
 
     setWorld() {
@@ -59,16 +59,30 @@ class World {
         }
     }
 
-    checkCollision() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusbar.setPercentage(this.character.energy)
-                }              
-            })
+            this.checkCollision();
+            this.checkThrowObjects();
         }, 100)
     }
 
+    checkCollision() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusbar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkThrowObjects (){
+        if (this.keyboard.d ) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            this.level.throwableObjects.push(bottle);
+        }
+    }
 
 }
+
+
+

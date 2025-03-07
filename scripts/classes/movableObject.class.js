@@ -41,11 +41,12 @@ class MoveableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 330;
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.y < 330;
+        }
     }
-
-
-
 
     moveRight() {
         this.x += this.speed;
@@ -65,10 +66,6 @@ class MoveableObject extends DrawableObject {
         this.img = this.imageChache[path]
         this.currentImage++
     }
-
-
-
-  
 
     mirroredImage(ctx) {
         ctx.save();
