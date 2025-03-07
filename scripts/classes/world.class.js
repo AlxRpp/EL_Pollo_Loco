@@ -7,6 +7,8 @@ class World {
     camera_x = 0;
     level = level1;
     statusbar = new Statusbar();
+    coinStatusbar = new CoinStatusbar();
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -30,7 +32,8 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // Camera Backwarts
         // Space for fixed Elements
-        this.addItemToCanvas(this.statusbar)
+        this.addItemToCanvas(this.statusbar);
+        this.addItemToCanvas(this.coinStatusbar)
         this.ctx.translate(this.camera_x, 0); // Camera Forewarts
 
         
