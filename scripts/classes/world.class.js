@@ -33,8 +33,11 @@ class World {
         this.addItemToCanvas(this.statusbar)
         this.ctx.translate(this.camera_x, 0); // Camera Forewarts
 
+        
         this.addItemToCanvas(this.character)
         this.addObjectToCanvas(this.level.enemies);
+        this.addObjectToCanvas(this.level.throwableObjects);
+
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => {
             this.draw();
@@ -77,7 +80,7 @@ class World {
 
     checkThrowObjects (){
         if (this.keyboard.d ) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            let bottle = new ThrowableObject(this.character.x + 40, this.character.y - 30 )
             this.level.throwableObjects.push(bottle);
         }
     }
