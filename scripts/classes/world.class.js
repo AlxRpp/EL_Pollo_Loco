@@ -9,7 +9,6 @@ class World {
     statusbar = new Statusbar();
     coinStatusbar = new CoinStatusbar();
     bottleStatusbar = new BottleStatusbar();
-    coins = new Coins();
 
 
     constructor(canvas, keyboard) {
@@ -39,10 +38,9 @@ class World {
         this.addItemToCanvas(this.bottleStatusbar);
         this.ctx.translate(this.camera_x, 0); // Camera Forewarts
 
-        this.addItemToCanvas(this.coins);
-        
-        this.addItemToCanvas(this.character)
+        this.addItemToCanvas(this.character);
         this.addObjectToCanvas(this.level.enemies);
+        this.addObjectToCanvas(this.level.coins);
         this.addObjectToCanvas(this.level.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -83,6 +81,13 @@ class World {
                 this.statusbar.setPercentage(this.character.energy);
             }
         });
+
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                console.log("charakter collected:", coin);
+                
+            }
+        })
     }
 
     checkThrowObjects (){

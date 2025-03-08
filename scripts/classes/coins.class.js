@@ -1,5 +1,4 @@
 class Coins extends MoveableObject {
-    x = 250;
     width = 150;
     height = 150;
     images_Coins = [
@@ -10,11 +9,13 @@ class Coins extends MoveableObject {
     imageChache = {};
 
 
-    constructor() {
-        
+    constructor(x, y) {
         super().loadImage('assets/images/8_coin/coin_1.png');
         this.loadImages(this.images_Coins);
+        this.x = x;
+        this.y = y;
         this.animate();
+
     }
 
     animate() {
