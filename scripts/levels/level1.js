@@ -10,15 +10,15 @@ const level1 = new Level(
     ],
     [
         new Coins(450, 250),
-        new Coins(500, 200),
+        new Coins(450, 200),
         new Coins(550, 150),
-        new Coins(600, 200),
+        new Coins(650, 200),
         new Coins(650, 250),
         new Coins(1450, 250),
         new Coins(1500, 200),
         new Coins(1550, 150),
         new Coins(1600, 200),
-        new Coins(10650, 250),
+        new Coins(1650, 250),
     ],
     [
       //throwable Objects

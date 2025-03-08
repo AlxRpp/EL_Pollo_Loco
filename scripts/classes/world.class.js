@@ -52,7 +52,8 @@ class World {
 
     addObjectToCanvas(object) {
         object.forEach(movableObject => {
-            this.addItemToCanvas(movableObject)
+            this.addItemToCanvas(movableObject);
+            movableObject.drawFrame(this.ctx)
         })
     }
 
