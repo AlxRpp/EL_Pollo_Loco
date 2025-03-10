@@ -43,6 +43,7 @@ class World {
         this.addItemToCanvas(this.character);
         this.addObjectToCanvas(this.level.enemies);
         this.addObjectToCanvas(this.level.coins);
+        this.addObjectToCanvas(this.level.bottles);
         this.addObjectToCanvas(this.level.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -85,8 +86,8 @@ class World {
                 this.statusbar.setPercentage(this.character.energy);
             }
         });
-        
-       
+
+
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.amount += 10;
@@ -94,12 +95,25 @@ class World {
                 this.coinStatusbar.setPercentage(this.amount)
             }
         });
+
+        this.level.bottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
+                this.amount += 20;
+                this.level.throwableObjects.push(thrownBottle);
+                this.level.bottles.splice(index, 1)
+                this.bottleStatusbar.setPercentage(this.amount)
+                console.log("flasche aufgehoben", index);
+                console.log("flaschen gesamt", this.level.throwableObjects.length)
+            }
+        });
     }
 
     checkThrowObjects() {
-        if (this.keyboard.d) {
-            let bottle = new ThrowableObject(this.character.x + 40, this.character.y - 30)
-            this.level.throwableObjects.push(bottle);
+        if (this.keyboard.d && this.level.throwableObjects.length > 0) {
+            let test = new ThrowableObject()
+            this.level.throwableObjects.splice(0, 1);
+            test.throw()
         }
     }
 

@@ -9,19 +9,27 @@ const level1 = new Level(
         new Clouds('./assets/images/background/4_clouds/1.png'),
     ],
     [
-        new Coins(450, 350),
-        new Coins(450, 200),
-        new Coins(550, 150),
-        new Coins(650, 200),
-        new Coins(650, 250),
-        new Coins(1450, 250),
-        new Coins(1500, 200),
-        new Coins(1550, 150),
-        new Coins(1600, 200),
-        new Coins(1650, 250),
+        // new Coins(450, 350),
+        // new Coins(450, 200),
+        // new Coins(550, 150),
+        // new Coins(650, 200),
+        // new Coins(650, 250),
+        // new Coins(1450, 250),
+        // new Coins(1500, 200),
+        // new Coins(1550, 150),
+        // new Coins(1600, 200),
+        // new Coins(1650, 250),
     ],
     [
-      //throwable Objects
+        new Bottle(300, 400),
+        new Bottle(500, 400),
+        new Bottle(700, 400),
+        new Bottle(900, 400),
+        new Bottle(1100, 400),
+
+    ],
+    [
+       // ThrowableObjects
     ],
     [
         new Background('./assets/images/background/Sky.png', -1024 * 2),
