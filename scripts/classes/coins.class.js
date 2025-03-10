@@ -6,17 +6,15 @@ class Coins extends MoveableObject {
         'assets/images/8_coin/coin_2.png',
     ];
 
-    imageChache = {};
-
-
+    
     constructor(x, y) {
         super().loadImage('assets/images/8_coin/coin_1.png');
         this.loadImages(this.images_Coins);
         this.x = x;
         this.y = y;
         this.animate();
-
     }
+
 
     animate() {
         setInterval(() => {
