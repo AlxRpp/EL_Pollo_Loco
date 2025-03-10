@@ -7,10 +7,10 @@ class Character extends MoveableObject {
 
 
     offset = {
-        top: 120,
-        left: 40,
-        right: 30,
-        bottom: 30
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
     };
     images_Walking = [
         './assets/images/charakter/run/green__0012_run_1.png',

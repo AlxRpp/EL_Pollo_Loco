@@ -9,6 +9,8 @@ class World {
     statusbar = new Statusbar();
     coinStatusbar = new CoinStatusbar();
     bottleStatusbar = new BottleStatusbar();
+    amount = 0;
+
 
 
     constructor(canvas, keyboard) {
@@ -75,6 +77,7 @@ class World {
         }, 100)
     }
 
+
     checkCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -82,23 +85,26 @@ class World {
                 this.statusbar.setPercentage(this.character.energy);
             }
         });
-
-        this.level.coins.forEach((coin) => {
+        
+       
+        this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
-                console.log("charakter collected:", coin);
-                
+                this.amount += 10;
+                this.level.coins.splice(index, 1)
+                this.coinStatusbar.setPercentage(this.amount)
             }
-        })
+        });
     }
 
-    checkThrowObjects (){
-        if (this.keyboard.d ) {
-            let bottle = new ThrowableObject(this.character.x + 40, this.character.y - 30 )
+    checkThrowObjects() {
+        if (this.keyboard.d) {
+            let bottle = new ThrowableObject(this.character.x + 40, this.character.y - 30)
             this.level.throwableObjects.push(bottle);
         }
     }
 
 }
+
 
 
 

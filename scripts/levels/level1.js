@@ -9,7 +9,7 @@ const level1 = new Level(
         new Clouds('./assets/images/background/4_clouds/1.png'),
     ],
     [
-        new Coins(450, 250),
+        new Coins(450, 350),
         new Coins(450, 200),
         new Coins(550, 150),
         new Coins(650, 200),
