@@ -113,7 +113,6 @@ class World {
         if (this.keyboard.d && this.level.throwableObjects.length > 0) {
             let test = new ThrowableObject()
             this.level.throwableObjects.splice(0, 1);
-            test.throw()
         }
     }
 
