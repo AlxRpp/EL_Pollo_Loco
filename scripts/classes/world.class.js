@@ -75,21 +75,30 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollision();
+            this.checkCollisions();
             this.checkThrownObjects();
         }, 100)
     }
 
 
-    checkCollision() {
+    checkCollisions() {
+        this.charakterEnemyCollision();
+        this.characterBottleCollision();
+        this.characterCoinCollision();
+        this.bottleEnemyCollision();
+    }
+
+
+    charakterEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusbar.setPercentage(this.character.energy);
             }
         });
+    }
 
-
+    characterCoinCollision() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.amount += 10;
@@ -97,21 +106,25 @@ class World {
                 this.coinStatusbar.setPercentage(this.amount)
             }
         });
+    }
 
+    characterBottleCollision() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.amount += 20;
                 this.level.bottles.splice(index, 1)
                 this.bottleStatusbar.setPercentage(this.amount);
                 this.collectedBottles++;
-                console.log(this.collectedBottles);
             }
         });
+    }
 
 
+    bottleEnemyCollision() {
         this.level.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy, index) => {
                 if (bottle.isColliding(enemy)) {
+                    this.splashBottle()
                     console.log("Bottle hit enemy", enemy);
                     enemy.stopAnimation();
                     enemy.loadImage(enemy.images_Dead);
@@ -126,6 +139,12 @@ class World {
     }
 
 
+    splashBottle() {
+        if (this.ThrowableObject < 50) {
+            this.playAnimation(this.images_BottleSplash);
+        }
+    }
+
     checkThrownObjects() {
         if (this.bottlesPickedUp()) {
             this.throwObjects();
@@ -139,25 +158,24 @@ class World {
     throwObjects() {
         if (this.keyboard.d && this.character.otherDirection) {
             let thrownBottle = new ThrowableObject(this.character.x - 40, this.character.y - 30, true);
-            this.level.throwableObjects.push(thrownBottle);
-            this.collectedBottles--;
-            this.amount -= 20;
-            this.bottleStatusbar.setPercentage(this.amount);
-            if (this.collectedBottles < 0) {
-                this.collectedBottles = 0;
-            }
+            this.throwBottle(thrownBottle);
         } else if (this.keyboard.d) {
             let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30, false);
-            this.level.throwableObjects.push(thrownBottle);
-            this.collectedBottles--;
-            this.amount -= 20;
-            this.bottleStatusbar.setPercentage(this.amount);
-            if (this.collectedBottles < 0) {
-                this.collectedBottles = 0;
-            }
+            this.throwBottle(thrownBottle);
+
         }
     }
 
+
+    throwBottle(thrownBottle) {
+        this.level.throwableObjects.push(thrownBottle);
+        this.collectedBottles--;
+        this.amount -= 20;
+        this.bottleStatusbar.setPercentage(this.amount);
+        if (this.collectedBottles < 0) {
+            this.collectedBottles = 0;
+        }
+    }
 
 }
 
