@@ -166,7 +166,6 @@ class World {
         }
     }
 
-
     throwBottle(thrownBottle) {
         this.level.throwableObjects.push(thrownBottle);
         this.collectedBottles--;
