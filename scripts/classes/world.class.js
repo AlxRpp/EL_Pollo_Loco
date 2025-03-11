@@ -85,7 +85,6 @@ class World {
         this.charakterEnemyCollision();
         this.characterBottleCollision();
         this.characterCoinCollision();
-        this.bottleEnemyCollision();
     }
 
 
@@ -120,48 +119,28 @@ class World {
     }
 
 
-    bottleEnemyCollision() {
-        this.level.throwableObjects.forEach((bottle) => {
-            this.level.enemies.forEach((enemy, index) => {
-                if (bottle.isColliding(enemy)) {
-                    this.splashBottle()
-                    console.log("Bottle hit enemy", enemy);
-                    enemy.stopAnimation();
-                    enemy.loadImage(enemy.images_Dead);
-                    this.test.enemyDead = true;
-                    setTimeout(() => {
-                        enemy.loadImage(enemy.images_Empty);
-                        this.level.enemies.splice(index, 1)
-                    }, 1000)
-                }
-            })
-        });
-    }
 
 
-    splashBottle() {
-        if (this.ThrowableObject < 50) {
-            this.playAnimation(this.images_BottleSplash);
-        }
-    }
+
+
 
     checkThrownObjects() {
-        if (this.bottlesPickedUp()) {
+        if (this.collectedBottles > 0) {
             this.throwObjects();
         }
-    }
-
-    bottlesPickedUp() {
-        return this.collectedBottles > 0
     }
 
     throwObjects() {
         if (this.keyboard.d && this.character.otherDirection) {
             let thrownBottle = new ThrowableObject(this.character.x - 40, this.character.y - 30, true);
             this.throwBottle(thrownBottle);
+            this.bottleEnemyCollision(thrownBottle);
+
         } else if (this.keyboard.d) {
             let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30, false);
             this.throwBottle(thrownBottle);
+            this.bottleEnemyCollision(thrownBottle);
+
 
         }
     }
@@ -174,7 +153,42 @@ class World {
         if (this.collectedBottles < 0) {
             this.collectedBottles = 0;
         }
-    }
+        this.splashBottle(thrownBottle);
+    };
+
+
+    bottleEnemyCollision(thrownBottle) {
+        setInterval(()=>{
+            this.level.throwableObjects.forEach((bottle) => {
+                this.level.enemies.forEach((enemy, index) => {
+                    if (bottle.isColliding(enemy)) {
+                        this.splashBottle(thrownBottle)
+                        console.log("Bottle hit enemy", enemy);
+                        enemy.stopAnimation();
+                        enemy.loadImage(enemy.images_Dead);
+                        this.test.enemyDead = true;
+                        setTimeout(() => {
+                            enemy.loadImage(enemy.images_Empty);
+                            this.level.enemies.splice(index, 1)
+                        }, 1000)
+                    }
+                })
+            });
+        },100)
+
+    };
+
+    splashBottle(bottle) {
+        // setInterval(()=>{
+   
+        // },1000)
+        if (bottle.y > 300) {
+            bottle.y = 330;
+            bottle.x = bottle.x
+            bottle.playAnimation(bottle.images_BottleSplash);
+        }
+    };
+
 
 }
 
