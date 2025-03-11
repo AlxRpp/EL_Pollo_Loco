@@ -137,8 +137,8 @@ class World {
     }
 
     throwObjects() {
-        if (this.keyboard.d) {
-            let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
+        if (this.keyboard.d && this.character.otherDirection) {
+            let thrownBottle = new ThrowableObject(this.character.x - 40, this.character.y - 30, true);
             this.level.throwableObjects.push(thrownBottle);
             this.collectedBottles--;
             this.amount -= 20;
@@ -146,7 +146,15 @@ class World {
             if (this.collectedBottles < 0) {
                 this.collectedBottles = 0;
             }
-            console.log(this.collectedBottles);
+        } else if (this.keyboard.d) {
+            let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30, false);
+            this.level.throwableObjects.push(thrownBottle);
+            this.collectedBottles--;
+            this.amount -= 20;
+            this.bottleStatusbar.setPercentage(this.amount);
+            if (this.collectedBottles < 0) {
+                this.collectedBottles = 0;
+            }
         }
     }
 
