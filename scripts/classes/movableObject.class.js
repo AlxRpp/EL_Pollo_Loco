@@ -13,11 +13,13 @@ class MoveableObject extends DrawableObject {
     };
 
     hit() {
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0
-        } else {
-            this.lastHit = new Date().getTime();
+        if (this.Chicken.isDead == false) {
+            this.energy -= 5;
+            if (this.energy < 0) {
+                this.energy = 0
+            } else {
+                this.lastHit = new Date().getTime();
+            }
         }
     }
 

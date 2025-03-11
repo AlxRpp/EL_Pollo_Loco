@@ -107,11 +107,21 @@ class World {
             }
         });
 
-        // this.level.enemies.forEach((enemy) => {
-        //     if (this.level.throwableObjects.isColliding(enemy)) {
-        //         console.log("Enemy hit by Bottle:", enemy);
-        //     }
-        // });
+
+        this.level.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (bottle.isColliding(enemy)) {
+                    console.log("Bottle hit enemy", enemy);
+                    enemy.stopAnimation();
+                    enemy.loadImage(enemy.images_Dead);
+                    enemy.isDead = true;
+                    console.log(enemy.isDead);
+                    setTimeout(()=>{
+                        enemy.loadImage(enemy.images_Empty);
+                    },1000)
+                }
+            })
+        });
     }
 
 
