@@ -10,6 +10,7 @@ class World {
     coinStatusbar = new CoinStatusbar();
     bottleStatusbar = new BottleStatusbar();
     amount = 0;
+    collectedBottles = 0;
 
 
 
@@ -74,7 +75,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollision();
-            this.checkThrowObjects();
+            this.checkThrownObjects();
         }, 100)
     }
 
@@ -98,21 +99,35 @@ class World {
 
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
-                let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
                 this.amount += 20;
-                this.level.throwableObjects.push(thrownBottle);
                 this.level.bottles.splice(index, 1)
-                this.bottleStatusbar.setPercentage(this.amount)
-                console.log("flasche aufgehoben", index);
-                console.log("flaschen gesamt", this.level.throwableObjects.length)
+                this.bottleStatusbar.setPercentage(this.amount);
+                this.collectedBottles ++;
+                console.log(this.collectedBottles);
             }
         });
     }
 
-    checkThrowObjects() {
-        if (this.keyboard.d && this.level.throwableObjects.length > 0) {
-            let test = new ThrowableObject()
-            this.level.throwableObjects.splice(0, 1);
+    throwObjects() {
+        if (this.keyboard.d) {
+            let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
+            this.level.throwableObjects.push(thrownBottle);
+            this.collectedBottles --;
+            if (this.collectedBottles < 0) {
+                this.collectedBottles = 0;
+            }
+            console.log(this.collectedBottles);
+
+        }
+    }
+
+    bottlesPickedUp(){
+        return this.collectedBottles > 0 
+    }
+
+    checkThrownObjects(){
+        if (this.bottlesPickedUp()) {
+            this.throwObjects();
         }
     }
 
