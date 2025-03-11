@@ -11,9 +11,11 @@ class MoveableObject extends DrawableObject {
         right: 0,
         bottom: 0
     };
+    enemyDead = false;
+
 
     hit() {
-        if (this.Chicken.isDead == false) {
+        if (this.enemyDead === false) {
             this.energy -= 5;
             if (this.energy < 0) {
                 this.energy = 0
@@ -21,13 +23,14 @@ class MoveableObject extends DrawableObject {
                 this.lastHit = new Date().getTime();
             }
         }
+
     }
 
     isDead() {
         return this.energy == 0;
     }
 
-    isHurt(){
+    isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
         return timePassed < .45;

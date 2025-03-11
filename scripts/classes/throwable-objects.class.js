@@ -27,6 +27,15 @@ class ThrowableObject extends MoveableObject {
         }, 45);
     }
 
+    throwLeft() {
+        this.speedY = 30;
+        this.applyGravitation();
+        setInterval(() => {
+            this.playAnimation(this.images_bottleThrow)
+            this.x -= 10;
+        }, 45);
+    }
+
 
 
 }

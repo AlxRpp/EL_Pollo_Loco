@@ -2,7 +2,6 @@ class Chicken extends MoveableObject {
     y = 360;
     height = 120;
     width = 120;
-    isDead = false;
     images_Walking = [
         'assets/images/enemys/Human/Run/0_Warrior_Run_000.png',
         'assets/images/enemys/Human/Run/0_Warrior_Run_001.png',

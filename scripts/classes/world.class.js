@@ -11,6 +11,7 @@ class World {
     bottleStatusbar = new BottleStatusbar();
     amount = 0;
     collectedBottles = 0;
+    test = new MoveableObject()
 
 
 
@@ -109,16 +110,16 @@ class World {
 
 
         this.level.throwableObjects.forEach((bottle) => {
-            this.level.enemies.forEach((enemy) => {
+            this.level.enemies.forEach((enemy, index) => {
                 if (bottle.isColliding(enemy)) {
                     console.log("Bottle hit enemy", enemy);
                     enemy.stopAnimation();
                     enemy.loadImage(enemy.images_Dead);
-                    enemy.isDead = true;
-                    console.log(enemy.isDead);
-                    setTimeout(()=>{
+                    this.test.enemyDead = true;
+                    setTimeout(() => {
                         enemy.loadImage(enemy.images_Empty);
-                    },1000)
+                        this.level.enemies.splice(index, 1)
+                    }, 1000)
                 }
             })
         });
@@ -130,23 +131,23 @@ class World {
             this.throwObjects();
         }
     }
-    
+
     bottlesPickedUp() {
         return this.collectedBottles > 0
     }
 
     throwObjects() {
-            if (this.keyboard.d) {
-                let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
-                this.level.throwableObjects.push(thrownBottle);
-                this.collectedBottles--;
-                this.amount -= 20;
-                this.bottleStatusbar.setPercentage(this.amount);
-                if (this.collectedBottles < 0) {
-                    this.collectedBottles = 0;
-                }
-                console.log(this.collectedBottles);
+        if (this.keyboard.d) {
+            let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
+            this.level.throwableObjects.push(thrownBottle);
+            this.collectedBottles--;
+            this.amount -= 20;
+            this.bottleStatusbar.setPercentage(this.amount);
+            if (this.collectedBottles < 0) {
+                this.collectedBottles = 0;
             }
+            console.log(this.collectedBottles);
+        }
     }
 
 
