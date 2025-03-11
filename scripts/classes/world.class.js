@@ -102,34 +102,43 @@ class World {
                 this.amount += 20;
                 this.level.bottles.splice(index, 1)
                 this.bottleStatusbar.setPercentage(this.amount);
-                this.collectedBottles ++;
+                this.collectedBottles++;
                 console.log(this.collectedBottles);
             }
         });
+
+        // this.level.enemies.forEach((enemy) => {
+        //     if (this.level.throwableObjects.isColliding(enemy)) {
+        //         console.log("Enemy hit by Bottle:", enemy);
+        //     }
+        // });
     }
 
-    throwObjects() {
-        if (this.keyboard.d) {
-            let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
-            this.level.throwableObjects.push(thrownBottle);
-            this.collectedBottles --;
-            if (this.collectedBottles < 0) {
-                this.collectedBottles = 0;
-            }
-            console.log(this.collectedBottles);
 
-        }
-    }
-
-    bottlesPickedUp(){
-        return this.collectedBottles > 0 
-    }
-
-    checkThrownObjects(){
+    checkThrownObjects() {
         if (this.bottlesPickedUp()) {
             this.throwObjects();
         }
     }
+    
+    bottlesPickedUp() {
+        return this.collectedBottles > 0
+    }
+
+    throwObjects() {
+            if (this.keyboard.d) {
+                let thrownBottle = new ThrowableObject(this.character.x + 40, this.character.y - 30);
+                this.level.throwableObjects.push(thrownBottle);
+                this.collectedBottles--;
+                this.amount -= 20;
+                this.bottleStatusbar.setPercentage(this.amount);
+                if (this.collectedBottles < 0) {
+                    this.collectedBottles = 0;
+                }
+                console.log(this.collectedBottles);
+            }
+    }
+
 
 }
 
