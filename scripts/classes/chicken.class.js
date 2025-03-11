@@ -2,6 +2,12 @@ class Chicken extends MoveableObject {
     y = 360;
     height = 120;
     width = 120;
+    offset = {
+        top: 40,
+        left: 40,
+        right: 40,
+        bottom: 0
+    };
     images_Walking = [
         'assets/images/enemys/Human/Run/0_Warrior_Run_000.png',
         'assets/images/enemys/Human/Run/0_Warrior_Run_001.png',

@@ -119,11 +119,6 @@ class World {
     }
 
 
-
-
-
-
-
     checkThrownObjects() {
         if (this.collectedBottles > 0) {
             this.throwObjects();
@@ -158,7 +153,7 @@ class World {
 
 
     bottleEnemyCollision(thrownBottle) {
-        setInterval(()=>{
+        setInterval(() => {
             this.level.throwableObjects.forEach((bottle) => {
                 this.level.enemies.forEach((enemy, index) => {
                     if (bottle.isColliding(enemy)) {
@@ -174,19 +169,22 @@ class World {
                     }
                 })
             });
-        },100)
+        }, 100)
 
     };
 
     splashBottle(bottle) {
-        // setInterval(()=>{
-   
-        // },1000)
-        if (bottle.y > 300) {
-            bottle.y = 330;
-            bottle.x = bottle.x
-            bottle.playAnimation(bottle.images_BottleSplash);
-        }
+        setInterval(() => {
+            if (bottle.y > 350) {
+                bottle.y = 400;
+                bottle.playAnimation(bottle.images_BottleSplash);
+                setTimeout(() => {
+                    this.level.throwableObjects.splice(bottle, 1)
+
+                }, 1000)
+            }
+        }, 100)
+
     };
 
 

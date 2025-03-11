@@ -4,8 +4,6 @@ class Character extends MoveableObject {
     y = 330;
     speed = 10;
     world;
-
-
     offset = {
         top: 0,
         left: 0,
@@ -39,6 +37,12 @@ class Character extends MoveableObject {
         'assets/images/charakter/hurt/green__0020_hurt_3.png',
         'assets/images/charakter/hurt/green__0021_hurt_4.png',
     ];
+    images_idle = [
+        'assets/images/charakter/idle/green__0000_idle_1.png',
+        'assets/images/charakter/idle/green__0001_idle_2.png',
+        'assets/images/charakter/idle/green__0002_idle_3.png',
+
+    ];
 
 
 
@@ -49,6 +53,7 @@ class Character extends MoveableObject {
         this.loadImages(this.images_jumping);
         this.loadImages(this.images_dead);
         this.loadImages(this.images_hurt);
+        this.loadImages(this.images_idle);
         this.applyGravitation();
         this.animate();
     }
@@ -83,8 +88,17 @@ class Character extends MoveableObject {
                 this.playAnimation(this.images_jumping);
             } else if (this.world.keyboard.right || this.world.keyboard.left) {
                 this.playAnimation(this.images_Walking);
+            } else {
+               
             }
         }, 100);
+
+        // setTimeout(()=>{
+        //     setInterval(()=>{
+        //     this.playAnimation(this.images_idle);
+
+        //     }, 150)
+        // }, 1500)
     }
 
 
