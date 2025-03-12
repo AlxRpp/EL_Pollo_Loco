@@ -15,15 +15,12 @@ class MoveableObject extends DrawableObject {
 
 
     hit() {
-        if (this.enemyDead === false) {
-            this.energy -= 5;
-            if (this.energy < 0) {
-                this.energy = 0
-            } else {
-                this.lastHit = new Date().getTime();
-            }
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0
+        } else {
+            this.lastHit = new Date().getTime();
         }
-
     }
 
     isDead() {
